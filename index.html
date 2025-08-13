@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>T2D SWMS – Installation of Cable</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root { --w: 860px; }
+    body { font-family: system-ui, Arial, sans-serif; margin: 0; background:#f6f7fb; }
+    header { background:#0a2d57; color:#fff; padding:18px 16px; }
+    header h1 { margin:0; font-size: 1.2rem; }
+    main { max-width: var(--w); margin: 20px auto; background:#fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,.06);}
+    fieldset { border:1px solid #e0e0e0; border-radius:10px; margin:16px 0; padding:14px;}
+    legend { font-weight:700; }
+    label { display:block; margin:10px 0 6px; font-weight:600;}
+    input[type=text], input[type=tel], input[type=date], input[type=email], textarea {
+      width:100%; padding:10px; border:1px solid #cfd3d8; border-radius:8px; font-size:1rem;
+    }
+    .row { display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+    .muted { color:#6b7280; font-size:.9rem; }
+    button { background:#0a2d57; color:#fff; border:0; padding:12px 16px; border-radius:10px; font-size:1rem; cursor:pointer;}
+    button:disabled{ opacity:.6; cursor:not-allowed;}
+    .pill { display:inline-block; background:#eef3ff; border:1px solid #c9d7ff; padding:4px 8px; border-radius:999px; font-size:.85rem; margin:0 6px 6px 0;}
+    .check-grid { columns: 2; }
+    .ok { color:#106b29; font-weight:600; }
+    .error { color:#b00020; font-weight:600; }
+  </style>
+</head>
+<body>
+  <header><h1>T2D SWMS – Installation of Cable (Pilot)</h1></header>
+  <main>
+    <p class="muted">Fill this out and click submit. You’ll get an email with a PDF attached.</p>
+
+    <form id="swmsForm">
+      <fieldset>
+        <legend>Who is filling this in</legend>
+        <div class="row">
+          <div><label>Your name</label><input required name="submitterName" type="text" /></div>
+          <div><label>Your email</label><input required name="submitterEmail" type="email" /></div>
+        </div>
+        <div class="row">
+          <div><label>Your phone</label><input name="submitterPhone" type="tel" /></div>
+          <div><label>Submission date</label><input name="submissionDate" type="date" /></div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Header (from your SWMS)</legend>
+        <div class="row">
+          <div><label>SWMS Reference No.</label><input name="swmsRef" value="SWMS-01" /></div>
+          <div><label>Principal Contractor</label><input name="principalContractor" value="T2D CJV (Torrens to Darlington Joint Venture)" /></div>
+        </div>
+        <div class="row">
+          <div><label>PC Representative</label><input name="pcRep" /></div>
+          <div><label>Project / Site Manager</label><input name="siteManager" /></div>
+        </div>
+        <div class="row">
+          <div><label>Contact Phone</label><input name="contactPhone" /></div>
+          <div><label>Date provided to Client</label><input name="dateProvided" type="date" /></div>
+        </div>
+        <label>Job Description</label>
+        <input name="jobDescription" value="Installation of high-voltage (11 kV) and low-voltage (415 V) power cables" />
+        <label>Job Location</label>
+        <input name="jobLocation" value="Waterloo Corner Precast Facility, 1277–1297 Port Wakefield Rd, Waterloo Corner SA" />
+      </fieldset>
+
+      <fieldset>
+        <legend>High-risk construction work (tick those that apply)</legend>
+        <div class="check-grid">
+          <label class="pill"><input type="checkbox" name="highRisk" value="Work in or near a trench > 1.5 m" /> Trench > 1.5 m</label>
+          <label class="pill"><input type="checkbox" name="highRisk" value="Work on or near energised electrical installations or services" /> Energised electrical</label>
+          <label class="pill"><input type="checkbox" name="highRisk" value="Work on, in or adjacent to a road/traffic corridor" /> Traffic corridor</label>
+          <label class="pill"><input type="checkbox" name="highRisk" value="Work in area with movement of powered mobile plant" /> Mobile plant</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>PPE</legend>
+        <div class="check-grid">
+          <label class="pill"><input type="checkbox" name="ppe" value="Hard Hat" /> Hard Hat</label>
+          <label class="pill"><input type="checkbox" name="ppe" value="Safety Boots" /> Safety Boots</label>
+          <label class="pill"><input type="checkbox" name="ppe" value="Hi-Vis" /> Hi-Vis</label>
+          <label class="pill"><input type="checkbox" name="ppe" value="Long Sleeves/Pants" /> Long Sleeves/Pants</label>
+          <label class="pill"><input type="checkbox" name="ppe" value="Gloves" /> Gloves</label>
+          <label class="pill"><input type="checkbox" name="ppe" value="Safety Glasses" /> Safety Glasses</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Competency / licences</legend>
+        <textarea name="competency" rows="3" placeholder="e.g., Licensed electricians supervising terminations; Excavation competent person; Permits in place…"></textarea>
+      </fieldset>
+
+      <fieldset>
+        <legend>Consultation / names (TRA style)</legend>
+        <div class="row">
+          <div><label>Supervisor name</label><input name="supName" /></div>
+          <div><label>Supervisor date</label><input name="supDate" type="date" /></div>
+        </div>
+        <label>Workers consulted (comma-separated)</label>
+        <input name="workerNames" placeholder="Worker A, Worker B, Worker C" />
+      </fieldset>
+
+      <fieldset>
+        <legend>Job steps & controls (short summary)</legend>
+        <textarea name="jobSteps" rows="6" placeholder="1) Plan & locate services…
+2) Excavate with spotter; shoring if >1.5 m…
+3) Install conduits/bedding…
+4) Cable pull with spotters…
+5) Place cables & backfill…"></textarea>
+      </fieldset>
+
+      <button id="submitBtn" type="submit">Submit & Email PDF</button>
+      <p id="status" class="muted"></p>
+    </form>
+  </main>
+  <script>
+    const form = document.getElementById('swmsForm');
+    const statusEl = document.getElementById('status');
+    const btn = document.getElementById('submitBtn');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      btn.disabled = true; statusEl.textContent = 'Sending...';
+
+      const fd = new FormData(form);
+      const data = Object.fromEntries(fd.entries());
+      // Multi-selects
+      data.highRisk = fd.getAll('highRisk');
+      data.ppe = fd.getAll('ppe');
+
+      try {
+        const res = await fetch('/api/submit-swms', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        const out = await res.json();
+        if (!res.ok) throw new Error(out.error || 'Request failed');
+        statusEl.innerHTML = `<span class="ok">Done.</span> Check your email for the PDF (subject: "${out.subject}").`;
+        form.reset();
+      } catch (err) {
+        statusEl.innerHTML = `<span class="error">Error:</span> ${err.message}`;
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
