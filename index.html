@@ -1,150 +1,293 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>T2D SWMS – Installation of Cable</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    :root { --w: 860px; }
-    body { font-family: system-ui, Arial, sans-serif; margin: 0; background:#f6f7fb; }
-    header { background:#0a2d57; color:#fff; padding:18px 16px; }
-    header h1 { margin:0; font-size: 1.2rem; }
-    main { max-width: var(--w); margin: 20px auto; background:#fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,.06);}
-    fieldset { border:1px solid #e0e0e0; border-radius:10px; margin:16px 0; padding:14px;}
-    legend { font-weight:700; }
-    label { display:block; margin:10px 0 6px; font-weight:600;}
-    input[type=text], input[type=tel], input[type=date], input[type=email], textarea {
-      width:100%; padding:10px; border:1px solid #cfd3d8; border-radius:8px; font-size:1rem;
-    }
-    .row { display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
-    .muted { color:#6b7280; font-size:.9rem; }
-    button { background:#0a2d57; color:#fff; border:0; padding:12px 16px; border-radius:10px; font-size:1rem; cursor:pointer;}
-    button:disabled{ opacity:.6; cursor:not-allowed;}
-    .pill { display:inline-block; background:#eef3ff; border:1px solid #c9d7ff; padding:4px 8px; border-radius:999px; font-size:.85rem; margin:0 6px 6px 0;}
-    .check-grid { columns: 2; }
-    .ok { color:#106b29; font-weight:600; }
-    .error { color:#b00020; font-weight:600; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Work Method Statement (SWMS) – T2D</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header><h1>T2D SWMS – Installation of Cable (Pilot)</h1></header>
-  <main>
-    <p class="muted">Fill this out and click submit. You’ll get an email with a PDF attached.</p>
-
-    <form id="swmsForm">
-      <fieldset>
-        <legend>Who is filling this in</legend>
-        <div class="row">
-          <div><label>Your name</label><input required name="submitterName" type="text" /></div>
-          <div><label>Your email</label><input required name="submitterEmail" type="email" /></div>
+    <header>
+        <div class="logo-container">
+            <!-- Company logos -->
+    <!-- logos are referenced from the repository root rather than an images subfolder -->
+    <img src="PBE Logo.png" alt="PBE Logo" class="logo">
+    <img src="logo-t2d.png" alt="T2D Alliance Logo" class="logo">
         </div>
-        <div class="row">
-          <div><label>Your phone</label><input name="submitterPhone" type="tel" /></div>
-          <div><label>Submission date</label><input name="submissionDate" type="date" /></div>
-        </div>
-      </fieldset>
+        <h1>Safe Work Method Statement (SWMS)</h1>
+        <p class="subtitle">Torrens to Darlington (T2D) – Cable Installation, Terminations, Testing &amp; Commissioning</p>
+    </header>
+    <main>
+        <form id="swms-form">
+            <!-- Project & administrative details -->
+            <section class="section">
+                <h2>Project &amp; Administrative Details</h2>
+                <div class="grid-4">
+                    <div class="form-group">
+                        <label for="swmsRef">SWMS Reference No.</label>
+                        <input type="text" id="swmsRef" name="swmsRef" value="SWMS-01">
+                    </div>
+                    <div class="form-group">
+                        <label for="principalContractor">Principal Contractor</label>
+                        <input type="text" id="principalContractor" name="principalContractor" value="T2D CJV (Torrens to Darlington Joint Venture)">
+                    </div>
+                    <div class="form-group">
+                        <label for="pcRepresentative">PC Representative</label>
+                        <input type="text" id="pcRepresentative" name="pcRepresentative">
+                    </div>
+                    <div class="form-group">
+                        <label for="dateProvided">Date provided to client</label>
+                        <input type="date" id="dateProvided" name="dateProvided">
+                    </div>
+                    <div class="form-group">
+                        <label for="siteManager">Project or Site Manager</label>
+                        <input type="text" id="siteManager" name="siteManager" value="Chris Hoogwerf">
+                    </div>
+                    <div class="form-group">
+                        <label for="siteManagerPhone">Contact Phone</label>
+                        <input type="tel" id="siteManagerPhone" name="siteManagerPhone" value="0491 355 760">
+                    </div>
+                    <div class="form-group full">
+                        <label for="jobDescription">Job Description</label>
+                        <input type="text" id="jobDescription" name="jobDescription" value="Installation of high‑voltage (11 kV) and low‑voltage (415 V) power cables, cable terminations, HV cable testing &amp; commissioning">
+                    </div>
+                    <div class="form-group full">
+                        <label for="jobLocation">Job Location</label>
+                        <input type="text" id="jobLocation" name="jobLocation" value="Waterloo Corner Precast Facility, 1277–1297 Port Wakefield Rd, Waterloo Corner SA">
+                    </div>
+                </div>
+                <!-- Management and worker review -->
+                <div class="grid-2">
+                    <fieldset>
+                        <legend>Management Review</legend>
+                        <label for="managementRole">Role</label>
+                        <input type="text" id="managementRole" name="managementRole">
+                        <label for="managementSignature">Signed</label>
+                        <input type="text" id="managementSignature" name="managementSignature" placeholder="Name / signature">
+                        <label for="managementDate">Date</label>
+                        <input type="date" id="managementDate" name="managementDate">
+                    </fieldset>
+                    <fieldset>
+                        <legend>Worker Review</legend>
+                        <label for="workerRole">Role</label>
+                        <input type="text" id="workerRole" name="workerRole">
+                        <label for="workerSignature">Signed</label>
+                        <input type="text" id="workerSignature" name="workerSignature" placeholder="Name / signature">
+                        <label for="workerDate">Date</label>
+                        <input type="date" id="workerDate" name="workerDate">
+                    </fieldset>
+                </div>
+            </section>
 
-      <fieldset>
-        <legend>Header (from your SWMS)</legend>
-        <div class="row">
-          <div><label>SWMS Reference No.</label><input name="swmsRef" value="SWMS-01" /></div>
-          <div><label>Principal Contractor</label><input name="principalContractor" value="T2D CJV (Torrens to Darlington Joint Venture)" /></div>
-        </div>
-        <div class="row">
-          <div><label>PC Representative</label><input name="pcRep" /></div>
-          <div><label>Project / Site Manager</label><input name="siteManager" /></div>
-        </div>
-        <div class="row">
-          <div><label>Contact Phone</label><input name="contactPhone" /></div>
-          <div><label>Date provided to Client</label><input name="dateProvided" type="date" /></div>
-        </div>
-        <label>Job Description</label>
-        <input name="jobDescription" value="Installation of high-voltage (11 kV) and low-voltage (415 V) power cables" />
-        <label>Job Location</label>
-        <input name="jobLocation" value="Waterloo Corner Precast Facility, 1277–1297 Port Wakefield Rd, Waterloo Corner SA" />
-      </fieldset>
+            <!-- High risk construction work -->
+            <section class="section">
+                <h2>High Risk Construction Work</h2>
+                <p>Select all high‑risk construction activities applicable to this SWMS.</p>
+                <div class="checkbox-grid">
+                    <label><input type="checkbox" name="highRisk[]" value="falling"> Risk of a person falling more than 2 metres</label>
+                    <label><input type="checkbox" name="highRisk[]" value="telecom"> Work on a telecommunication tower</label>
+                    <label><input type="checkbox" name="highRisk[]" value="demolition"> Demolition of load‑bearing structure</label>
+                    <label><input type="checkbox" name="highRisk[]" value="asbestos"> Likely to involve disturbing asbestos</label>
+                    <label><input type="checkbox" name="highRisk[]" value="temporary-support"> Temporary load‑bearing support for structural alterations or repairs</label>
+                    <label><input type="checkbox" name="highRisk[]" value="confined-space"> Work in or near a confined space</label>
+                    <label><input type="checkbox" name="highRisk[]" value="trench"> Work in or near a shaft or trench deeper than 1.5 m or a tunnel</label>
+                    <label><input type="checkbox" name="highRisk[]" value="explosives"> Use of explosives</label>
+                    <label><input type="checkbox" name="highRisk[]" value="pressurised-gas"> Work on or near pressurised gas mains or piping</label>
+                    <label><input type="checkbox" name="highRisk[]" value="chemical-lines"> Work on or near chemical, fuel or refrigerant lines</label>
+                    <label><input type="checkbox" name="highRisk[]" value="energised"> Work on or near energised electrical installations or services</label>
+                    <label><input type="checkbox" name="highRisk[]" value="flammable-atmosphere"> Work in an area that may have a contaminated or flammable atmosphere</label>
+                    <label><input type="checkbox" name="highRisk[]" value="precast"> Tilt‑up or precast concrete elements</label>
+                    <label><input type="checkbox" name="highRisk[]" value="traffic-corridor"> Work on, in or adjacent to a road, railway, shipping lane or other traffic corridor</label>
+                    <label><input type="checkbox" name="highRisk[]" value="powered-plant"> Work in an area with movement of powered mobile plant</label>
+                    <label><input type="checkbox" name="highRisk[]" value="extremes-temp"> Work in areas with artificial extremes of temperature</label>
+                    <label><input type="checkbox" name="highRisk[]" value="drowning"> Work in or near water or other liquid that involves a risk of drowning</label>
+                    <label><input type="checkbox" name="highRisk[]" value="diving"> Diving work</label>
+                </div>
+            </section>
 
-      <fieldset>
-        <legend>High-risk construction work (tick those that apply)</legend>
-        <div class="check-grid">
-          <label class="pill"><input type="checkbox" name="highRisk" value="Work in or near a trench > 1.5 m" /> Trench > 1.5 m</label>
-          <label class="pill"><input type="checkbox" name="highRisk" value="Work on or near energised electrical installations or services" /> Energised electrical</label>
-          <label class="pill"><input type="checkbox" name="highRisk" value="Work on, in or adjacent to a road/traffic corridor" /> Traffic corridor</label>
-          <label class="pill"><input type="checkbox" name="highRisk" value="Work in area with movement of powered mobile plant" /> Mobile plant</label>
-        </div>
-      </fieldset>
+            <!-- Global Mandatory Requirements (GMRs) -->
+            <section class="section">
+                <h2>Global Mandatory Requirements (GMRs)</h2>
+                <p>The following GMRs must be considered when planning and executing this task. Check all that apply.</p>
+                <div class="checkbox-grid">
+                    <label><input type="checkbox" name="gmrs[]" value="traffic-plant-people"> Traffic, Plant &amp; People (GMR 1)</label>
+                    <label><input type="checkbox" name="gmrs[]" value="excavation"> Excavation &amp; Trenching (GMR 2)</label>
+                    <label><input type="checkbox" name="gmrs[]" value="lifting"> Lifting Operations (GMR 3)</label>
+                    <label><input type="checkbox" name="gmrs[]" value="electrical"> Electrical Safety (GMR 4)</label>
+                    <label><input type="checkbox" name="gmrs[]" value="heights"> Working at Height (GMR 5)</label>
+                    <label><input type="checkbox" name="gmrs[]" value="wellbeing"> Wellbeing (GMR 6)</label>
+                    <label><input type="checkbox" name="gmrs[]" value="temporary-works"> Temporary Works (GMR 7)</label>
+                    <label><input type="checkbox" name="gmrs[]" value="isolation"> Isolation (GMR 8)</label>
+                    <label><input type="checkbox" name="gmrs[]" value="environment"> Environmental Management (GMR 9)</label>
+                    <label><input type="checkbox" name="gmrs[]" value="rail"> Work on Rail (GMR 10)</label>
+                </div>
+            </section>
 
-      <fieldset>
-        <legend>PPE</legend>
-        <div class="check-grid">
-          <label class="pill"><input type="checkbox" name="ppe" value="Hard Hat" /> Hard Hat</label>
-          <label class="pill"><input type="checkbox" name="ppe" value="Safety Boots" /> Safety Boots</label>
-          <label class="pill"><input type="checkbox" name="ppe" value="Hi-Vis" /> Hi-Vis</label>
-          <label class="pill"><input type="checkbox" name="ppe" value="Long Sleeves/Pants" /> Long Sleeves/Pants</label>
-          <label class="pill"><input type="checkbox" name="ppe" value="Gloves" /> Gloves</label>
-          <label class="pill"><input type="checkbox" name="ppe" value="Safety Glasses" /> Safety Glasses</label>
-        </div>
-      </fieldset>
+            <!-- Permit to Work Required -->
+            <section class="section">
+                <h2>Permit to Work Required</h2>
+                <p>Identify any permits required for the task (refer to project permit to work procedure). Check all that apply.</p>
+                <div class="checkbox-grid permit-grid">
+                    <label><input type="checkbox" name="permits[]" value="working-at-heights"> Working at Heights</label>
+                    <label><input type="checkbox" name="permits[]" value="isolations"> Simple or Complex Isolations</label>
+                    <label><input type="checkbox" name="permits[]" value="energisation"> Energisation</label>
+                    <label><input type="checkbox" name="permits[]" value="hot-work"> Hot Work</label>
+                    <label><input type="checkbox" name="permits[]" value="workbox"> Workbox</label>
+                    <label><input type="checkbox" name="permits[]" value="confined-space"> Confined Space</label>
+                    <label><input type="checkbox" name="permits[]" value="gridmesh"> Gridmesh &amp; Chequer Plate Installation/Removal</label>
+                    <label><input type="checkbox" name="permits[]" value="excavation"> Excavation &amp; Trenching / Ground Penetration</label>
+                    <label><input type="checkbox" name="permits[]" value="structure-penetration"> Structure Penetration &amp; Core Holing</label>
+                    <label><input type="checkbox" name="permits[]" value="clearing"> Clearing</label>
+                    <label><input type="checkbox" name="permits[]" value="water-discharge"> Water Discharge</label>
+                    <label><input type="checkbox" name="permits[]" value="out-of-hours"> Out of Hours</label>
+                    <label><input type="checkbox" name="permits[]" value="spoil-movement"> Spoil Movement</label>
+                    <label><input type="checkbox" name="permits[]" value="restricted-area"> Access a Restricted or No‑Go Area</label>
+                    <label><input type="checkbox" name="permits[]" value="permit-to-load"> Permit to Load (Temporary Works)</label>
+                    <label><input type="checkbox" name="permits[]" value="permit-to-remove"> Permit to Remove (Temporary Works)</label>
+                    <label><input type="checkbox" name="permits[]" value="other"> Other (Non‑JH permits) – specify below</label>
+                </div>
+                <textarea id="permitOther" name="permitOther" rows="2" placeholder="Specify other permits if selected"></textarea>
+            </section>
 
-      <fieldset>
-        <legend>Competency / licences</legend>
-        <textarea name="competency" rows="3" placeholder="e.g., Licensed electricians supervising terminations; Excavation competent person; Permits in place…"></textarea>
-      </fieldset>
+            <!-- PPE -->
+            <section class="section">
+                <h2>Mandatory Site‑Specific PPE</h2>
+                <p>Tick the PPE required for this task. Additional PPE may be required by activity.</p>
+                <div class="ppe-grid">
+                    <div class="ppe-item">
+                        <img src="ppe-hardhat.jpeg" alt="Hard Hat">
+                        <label><input type="checkbox" name="ppe[]" value="hard-hat"> Hard Hat</label>
+                    </div>
+                    <div class="ppe-item">
+                        <img src="ppe-boots.jpeg" alt="Safety Boots">
+                        <label><input type="checkbox" name="ppe[]" value="boots"> Safety Boots</label>
+                    </div>
+                    <div class="ppe-item">
+                        <img src="ppe-hivis.jpeg" alt="Hi-Vis">
+                        <label><input type="checkbox" name="ppe[]" value="hi-vis"> Hi‑Vis</label>
+                    </div>
+                    <div class="ppe-item">
+                        <img src="ppe-longsleeves.jpeg" alt="Long Sleeves">
+                        <label><input type="checkbox" name="ppe[]" value="long-sleeves"> Long Sleeves/Pants</label>
+                    </div>
+                    <div class="ppe-item">
+                        <img src="ppe-gloves.jpeg" alt="Gloves">
+                        <label><input type="checkbox" name="ppe[]" value="gloves"> Gloves</label>
+                    </div>
+                    <div class="ppe-item">
+                        <img src="ppe-hearing.jpeg" alt="Hearing">
+                        <label><input type="checkbox" name="ppe[]" value="hearing"> Hearing (if required)</label>
+                    </div>
+                    <div class="ppe-item">
+                        <img src="ppe-safety_glasses.jpeg" alt="Safety Glasses">
+                        <label><input type="checkbox" name="ppe[]" value="safety-glasses"> Safety Glasses</label>
+                    </div>
+                    <div class="ppe-item">
+                        <img src="ppe-goggles.jpeg" alt="Goggles">
+                        <label><input type="checkbox" name="ppe[]" value="goggles"> Goggles</label>
+                    </div>
+                    <div class="ppe-item">
+                        <img src="ppe-full_face.jpeg" alt="Full Face">
+                        <label><input type="checkbox" name="ppe[]" value="full-face"> Full Face</label>
+                    </div>
+                    <div class="ppe-item">
+                        <img src="ppe-mask_p1.jpeg" alt="P1/2 Mask">
+                        <label><input type="checkbox" name="ppe[]" value="mask-p1-p2"> P1/2 Mask</label>
+                    </div>
+                    <div class="ppe-item">
+                        <img src="ppe-mask_p3.jpeg" alt="P3 Mask">
+                        <label><input type="checkbox" name="ppe[]" value="mask-p3"> P3 Mask</label>
+                    </div>
+                    <div class="ppe-item">
+                        <img src="ppe-breathing_apparatus.jpeg" alt="Breathing Apparatus">
+                        <label><input type="checkbox" name="ppe[]" value="breathing-apparatus"> Breathing Apparatus</label>
+                    </div>
+                    <div class="ppe-item">
+                        <img src="ppe-harness.jpeg" alt="Harness">
+                        <label><input type="checkbox" name="ppe[]" value="harness"> Harness</label>
+                    </div>
+                </div>
+                <div class="form-group full">
+                    <label for="otherPPE">Other specific PPE or tools required</label>
+                    <textarea id="otherPPE" name="otherPPE" rows="3" placeholder="Describe any additional PPE or tools required for this task"></textarea>
+                </div>
+            </section>
 
-      <fieldset>
-        <legend>Consultation / names (TRA style)</legend>
-        <div class="row">
-          <div><label>Supervisor name</label><input name="supName" /></div>
-          <div><label>Supervisor date</label><input name="supDate" type="date" /></div>
-        </div>
-        <label>Workers consulted (comma-separated)</label>
-        <input name="workerNames" placeholder="Worker A, Worker B, Worker C" />
-      </fieldset>
+            <!-- Training, Skills & Licence Requirements -->
+            <section class="section">
+                <h2>Training, Skills &amp; Licence Requirements</h2>
+                <textarea id="trainingRequirements" name="trainingRequirements" rows="4" placeholder="Describe all training, skills and licences required to safely perform the work (e.g. qualified electricians, excavator licences, working at heights, confined space, rescue training, isolation training)."></textarea>
+            </section>
 
-      <fieldset>
-        <legend>Job steps & controls (short summary)</legend>
-        <textarea name="jobSteps" rows="6" placeholder="1) Plan & locate services…
-2) Excavate with spotter; shoring if >1.5 m…
-3) Install conduits/bedding…
-4) Cable pull with spotters…
-5) Place cables & backfill…"></textarea>
-      </fieldset>
+            <!-- Legislative References -->
+            <section class="section">
+                <h2>Applicable Legislative &amp; Reference Documents</h2>
+                <textarea id="legislativeRefs" name="legislativeRefs" rows="4" placeholder="List applicable WHS Acts, Regulations, Codes of Practice, Australian Standards and client/rail safety requirements relevant to this work."></textarea>
+            </section>
 
-      <button id="submitBtn" type="submit">Submit & Email PDF</button>
-      <p id="status" class="muted"></p>
-    </form>
-  </main>
-  <script>
-    const form = document.getElementById('swmsForm');
-    const statusEl = document.getElementById('status');
-    const btn = document.getElementById('submitBtn');
+            <!-- Emergency Response -->
+            <section class="section">
+                <h2>Emergency Response Plan</h2>
+                <textarea id="emergencyResponse" name="emergencyResponse" rows="4" placeholder="Outline the emergency response actions, contacts and equipment available on site (e.g. first aid, emergency services contact details, evacuation procedures, rescue equipment, muster point)."></textarea>
+            </section>
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      btn.disabled = true; statusEl.textContent = 'Sending...';
+            <!-- Hazards to Consider -->
+            <section class="section">
+                <h2>Hazards to Consider</h2>
+                <p>Select hazards/conditions and energies relevant to this activity. Consider the controls listed in the GMRs and permit requirements.</p>
+                <div class="checkbox-grid hazards-grid">
+                    <label><input type="checkbox" name="hazards[]" value="electrical-energy"> Electrical Energy</label>
+                    <label><input type="checkbox" name="hazards[]" value="pneumatic"> Pneumatic Energy</label>
+                    <label><input type="checkbox" name="hazards[]" value="hydraulic"> Hydraulic Energy</label>
+                    <label><input type="checkbox" name="hazards[]" value="chemical"> Chemical/Substance Hazards</label>
+                    <label><input type="checkbox" name="hazards[]" value="heat-fire-steam"> Heat/Fire/Steam</label>
+                    <label><input type="checkbox" name="hazards[]" value="radiation"> Radiation/UV</label>
+                    <label><input type="checkbox" name="hazards[]" value="cold"> Cold</label>
+                    <label><input type="checkbox" name="hazards[]" value="pressure"> Pressurised Systems</label>
+                    <label><input type="checkbox" name="hazards[]" value="gravitational"> Gravitational / Falling Objects</label>
+                    <label><input type="checkbox" name="hazards[]" value="mechanical"> Mechanical / Moving Parts</label>
+                    <label><input type="checkbox" name="hazards[]" value="noise"> Noise</label>
+                    <label><input type="checkbox" name="hazards[]" value="vibration"> Vibration</label>
+                    <label><input type="checkbox" name="hazards[]" value="residual"> Stored Residual Energy</label>
+                    <label><input type="checkbox" name="hazards[]" value="explosive"> Explosive Gases or Materials</label>
+                    <label><input type="checkbox" name="hazards[]" value="manual-handling"> Manual Handling / Ergonomic</label>
+                    <label><input type="checkbox" name="hazards[]" value="slip-trip-fall"> Slip / Trip / Fall</label>
+                    <label><input type="checkbox" name="hazards[]" value="vehicles-plant"> Vehicles &amp; Mobile Plant</label>
+                    <label><input type="checkbox" name="hazards[]" value="crane-work"> Crane / Lifting Work</label>
+                    <label><input type="checkbox" name="hazards[]" value="working-at-heights"> Working at Heights</label>
+                    <label><input type="checkbox" name="hazards[]" value="confined-space-hazard"> Confined Space</label>
+                    <label><input type="checkbox" name="hazards[]" value="underground-services"> Underground Services</label>
+                    <label><input type="checkbox" name="hazards[]" value="environmental"> Environmental (weather, extreme temperatures)</label>
+                </div>
+            </section>
 
-      const fd = new FormData(form);
-      const data = Object.fromEntries(fd.entries());
-      // Multi-selects
-      data.highRisk = fd.getAll('highRisk');
-      data.ppe = fd.getAll('ppe');
+            <!-- Job Steps / Risk Assessment Table -->
+            <section class="section">
+                <h2>Job Steps, Hazards, Controls &amp; Responsibilities</h2>
+                <p>Break the job into major steps, identify hazards and risks for each step, specify control measures, and nominate the person responsible for implementing the controls.</p>
+                <table id="job-steps-table">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Work Step / Activity</th>
+                            <th>Potential Hazards &amp; Risks</th>
+                            <th>Control Measures</th>
+                            <th>Person Responsible</th>
+                        </tr>
+                    </thead>
+                    <tbody id="job-steps-body">
+                        <!-- Pre-populated rows will be inserted by script.js -->
+                    </tbody>
+                </table>
+                <button type="button" id="add-row-btn">Add Row</button>
+            </section>
 
-      try {
-        const res = await fetch('/api/submit-swms', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-        });
-        const out = await res.json();
-        if (!res.ok) throw new Error(out.error || 'Request failed');
-        statusEl.innerHTML = `<span class="ok">Done.</span> Check your email for the PDF (subject: "${out.subject}").`;
-        form.reset();
-      } catch (err) {
-        statusEl.innerHTML = `<span class="error">Error:</span> ${err.message}`;
-      } finally {
-        btn.disabled = false;
-      }
-    });
-  </script>
+            <div class="submit-section">
+                <button type="submit">Save SWMS</button>
+            </div>
+        </form>
+        <div id="output" class="hidden"></div>
+    </main>
+    <script src="script.js"></script>
 </body>
 </html>

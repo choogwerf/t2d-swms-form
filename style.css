@@ -1,0 +1,237 @@
+/* Base styles */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    line-height: 1.5;
+}
+
+header {
+    background-color: #0a3d62;
+    color: #fff;
+    padding: 1rem 1.5rem;
+    text-align: center;
+    position: relative;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.logo {
+    max-height: 60px;
+    width: auto;
+}
+
+h1 {
+    margin: 0.25rem 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.subtitle {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #cce7ff;
+}
+
+main {
+    padding: 1rem 1.5rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section {
+    background-color: #fff;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.section h2 {
+    margin-top: 0;
+    color: #0a3d62;
+}
+
+/* Form groups */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.75rem;
+}
+
+.form-group.full {
+    grid-column: 1 / -1;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="date"],
+textarea {
+    padding: 0.4rem 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.95rem;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* Grid layouts */
+.grid-4 {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+/* Fieldsets */
+fieldset {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0.75rem;
+}
+
+legend {
+    font-weight: bold;
+    padding: 0 0.25rem;
+}
+
+/* Checkbox grids */
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.5rem 1rem;
+    margin-top: 0.5rem;
+}
+
+.checkbox-grid label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.4rem;
+    font-weight: normal;
+}
+
+.permit-grid label {
+    align-items: baseline;
+}
+
+.ppe-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.ppe-item {
+    width: 120px;
+    text-align: center;
+}
+
+.ppe-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 0.3rem;
+}
+
+/* Hazards grid */
+.hazards-grid {
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+}
+
+/* Job steps table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.5rem;
+}
+
+thead {
+    background-color: #0a3d62;
+    color: #fff;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    vertical-align: top;
+}
+
+th {
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #fff;
+}
+
+textarea.job-input {
+    width: 100%;
+    border: none;
+    resize: vertical;
+    padding: 0.4rem;
+    font-size: 0.9rem;
+    background: transparent;
+}
+
+/* Buttons */
+button {
+    background-color: #0a3d62;
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+button:hover {
+    background-color: #094170;
+}
+
+button#add-row-btn {
+    margin-top: 0.5rem;
+}
+
+.submit-section {
+    text-align: right;
+    margin-top: 1rem;
+}
+
+#output {
+    margin-top: 1rem;
+    background-color: #eee;
+    padding: 1rem;
+    border-radius: 4px;
+    white-space: pre-wrap;
+    font-family: monospace;
+}
+
+.hidden {
+    display: none;
+}
