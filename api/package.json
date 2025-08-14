@@ -1,0 +1,11 @@
+{
+  "name": "swms-api",
+  "version": "1.0.0",
+  "description": "Azure Functions API for SWMS form",
+  "private": true,
+  "dependencies": {
+    "@azure/communication-email": "^1.1.0",
+    "playwright": "^1.42.0",
+    "mustache": "^4.2.0"
+  }
+}
