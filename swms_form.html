@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SWMS-01 – Installation of Cable (Online Form)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{font-family: Arial,Helvetica,sans-serif;margin:0;padding:0;background:#f7f7f7;color:#222;}
+.container{max-width:1200px;margin:auto;background:#fff;padding:1.5rem;box-shadow:0 0 10px rgba(0,0,0,0.1);}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;}
+header img{max-height:60px;}
+h1,h2,h3{margin-top:0;}
+fieldset{border:1px solid #bbb;margin:1rem 0;padding:1rem;border-radius:4px;}
+legend{font-weight:bold;padding:0 .5rem;}
+label{display:block;margin:.3rem 0;}
+input[type=text],input[type=date],input[type=tel],select,textarea{width:100%;padding:.4rem;border:1px solid #ccc;border-radius:4px;}
+textarea{resize:vertical;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;}
+.table-responsive{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;margin:.5rem 0;}
+th,td{border:1px solid #ccc;padding:.4rem;text-align:left;font-size:.9rem;}
+th{background:#eee;}
+button{padding:.5rem 1rem;border:none;border-radius:4px;background:#006837;color:#fff;cursor:pointer;}
+button:hover{background:#024d28;}
+/* PPE icons */
+.ppe-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:1rem;}
+.ppe-item{text-align:center;}
+.ppe-item img{width:50px;height:50px;display:block;margin:0 auto .3rem;}
+
+/* Risk matrix container */
+.risk-container{display:flex;flex-wrap:wrap;gap:1rem;}
+.risk-container img{width:100%;max-width:100%;height:auto;}
+@media(min-width:768px){
+  .risk-container img{width:calc(50% - 0.5rem);}
+}
+
+/* Risk images grid for multiple matrices and tables */
+.risk-images{display:flex;flex-wrap:wrap;gap:1rem;}
+.risk-images img{width:100%;max-width:100%;height:auto;}
+@media(min-width:768px){
+  .risk-images img{width:calc(50% - 0.5rem);}
+}
+
+/* Improve readability for hazards and controls columns */
+#jobTable textarea{min-height:4rem;}
+#jobTable td{vertical-align:top;}
+/* Increase width and height for the Potential Hazards & Risks and Control Measures columns */
+#jobTable th:nth-child(2),
+#jobTable th:nth-child(3){
+  width:30%;
+}
+#jobTable td:nth-child(2) textarea,
+#jobTable td:nth-child(3) textarea{
+  min-height:6rem;
+  white-space:pre-line;
+}
+
+@media(min-width:768px){
+  .grid-md-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+}
+</style>
+</head>
+<body>
+<form class="container" id="swmsForm">
+  <header>
+    <img src="logo-t2d.png" alt="T2D Alliance Logo">
+    <div style="text-align:right;">
+      <h2>Safe Work Method Statement</h2>
+      <h3>Installation of Cable</h3>
+    </div>
+    <!-- Replaced Mega Electrics logo with a generic PBE logo -->
+    <img src="PBE Logo.png" alt="PBE Logo" style="max-height:60px;">
+  </header>
+
+  <!-- Project / Contact Section -->
+  <fieldset>
+    <legend>Project &amp; Contact Details</legend>
+    <div class="grid-2">
+      <div>
+        <label>Principal Contractor
+          <input type="text" name="principal_contractor" value="T2D CJV (Torrens to Darlington Joint Venture)">
+        </label>
+        <label>Project or Site Manager
+          <input type="text" name="site_manager" value="Chris Hoogwerf">
+        </label>
+        <label>Contact Phone
+          <input type="tel" name="manager_phone" value="0491 355 760">
+        </label>
+        <label>Management Review – Role
+          <input type="text" name="mgmt_review_role">
+        </label>
+        <label>Management Review – Signed
+          <input type="text" name="mgmt_review_signed">
+        </label>
+      </div>
+      <div>
+        <label>PC Representative
+          <input type="text" name="pc_representative">
+        </label>
+        <label>Job Description
+          <input type="text" name="job_description" value="Installation of high-voltage (11 kV) and low-voltage (415 V) power cables">
+        </label>
+        <label>SWMS Reference No.
+          <input type="text" name="swms_ref_no" value="SWMS-01">
+        </label>
+        <label>Date provided to Client
+          <input type="date" name="date_provided">
+        </label>
+        <label>Job Location
+          <input type="text" name="job_location" value="Waterloo Corner Precast Facility, 1277–1297 Port Wakefield Rd, Waterloo Corner SA">
+        </label>
+      </div>
+    </div>
+  </fieldset>
+
+  <!-- High-Risk Construction Work -->
+  <fieldset>
+    <legend>High-Risk Construction Work <small>(tick all that apply)</small></legend>
+    <div class="grid-3">
+      <label><input type="checkbox" name="fall_risk"> Risk of a person falling more than 2 metres</label>
+      <label><input type="checkbox" name="telecom_tower"> Work on a telecommunication tower</label>
+      <label><input type="checkbox" name="demolition"> Demolition of load-bearing structure</label>
+      <label><input type="checkbox" name="disturb_asbestos"> Likely to involve disturbing asbestos</label>
+      <label><input type="checkbox" name="temporary_support"> Temporary load-bearing support for structural alterations or repairs</label>
+      <label><input type="checkbox" name="confined_space"> Work in or near a confined space</label>
+      <label><input type="checkbox" name="shaft_trench"> Work in or near a shaft or trench deeper than 1.5 m or a tunnel</label>
+      <label><input type="checkbox" name="explosives"> Use of explosives</label>
+      <label><input type="checkbox" name="pressurised_gas"> Work on or near pressurised gas mains or piping</label>
+      <label><input type="checkbox" name="chemical_lines"> Work on or near chemical, fuel or refrigerant lines</label>
+      <label><input type="checkbox" name="energised_electrical"> Work on or near energised electrical installations or services</label>
+      <label><input type="checkbox" name="contaminated_atmosphere"> Work in an area that may have a contaminated or flammable atmosphere</label>
+      <label><input type="checkbox" name="precast_elements"> Tilt-up or precast concrete elements</label>
+      <label><input type="checkbox" name="traffic_corridor"> Work on, in or adjacent to a road, railway, shipping lane or other traffic corridor in use by traffic other than pedestrians</label>
+      <label><input type="checkbox" name="mobile_plant"> Work in an area with movement of powered mobile plant</label>
+      <label><input type="checkbox" name="extreme_temperature"> Work in areas with artificial extremes of temperature</label>
+      <label><input type="checkbox" name="water_liquid"> Work in or near water or other liquid that involves a risk of drowning</label>
+      <label><input type="checkbox" name="diving_work"> Diving work</label>
+    </div>
+  </fieldset>
+
+  <!-- Mandatory PPE -->
+  <fieldset>
+    <legend>Mandatory Site-Specific PPE</legend>
+    <div class="ppe-grid">
+      <div class="ppe-item">
+        <img src="ppe-hardhat.jpeg" alt="Hard Hat">
+        <label><input type="checkbox" name="ppe_hardhat"> Hard Hat</label>
+      </div>
+      <div class="ppe-item">
+        <img src="ppe-boots.jpeg" alt="Safety Boots">
+        <label><input type="checkbox" name="ppe_boots"> Safety Boots</label>
+      </div>
+      <div class="ppe-item">
+        <img src="ppe-hivis.jpeg" alt="Hi-Vis">
+        <label><input type="checkbox" name="ppe_hivis"> Hi-Vis</label>
+      </div>
+      <div class="ppe-item">
+        <img src="ppe-longsleeves.jpeg" alt="Long Sleeves/Pants">
+        <label><input type="checkbox" name="ppe_longsleeves"> Long Sleeves/Pants</label>
+      </div>
+      <div class="ppe-item">
+        <img src="ppe-gloves.jpeg" alt="Gloves">
+        <label><input type="checkbox" name="ppe_gloves"> Gloves</label>
+      </div>
+      <div class="ppe-item">
+        <img src="ppe-hearing.jpeg" alt="Hearing Protection">
+        <label><input type="checkbox" name="ppe_hearing"> Hearing Protection</label>
+      </div>
+      <div class="ppe-item">
+        <img src="ppe-safety_glasses.jpeg" alt="Safety Glasses">
+        <label><input type="checkbox" name="ppe_glasses"> Safety Glasses</label>
+      </div>
+      <div class="ppe-item">
+        <img src="ppe-goggles.jpeg" alt="Goggles">
+        <label><input type="checkbox" name="ppe_goggles"> Goggles</label>
+      </div>
+      <div class="ppe-item">
+        <img src="ppe-full_face.jpeg" alt="Full Face">
+        <label><input type="checkbox" name="ppe_fullface"> Full Face</label>
+      </div>
+      <div class="ppe-item">
+        <img src="ppe-mask_p1.jpeg" alt="P1/2 Mask">
+        <label><input type="checkbox" name="ppe_mask_p1"> P1/2 Mask</label>
+      </div>
+      <div class="ppe-item">
+        <img src="ppe-mask_p3.jpeg" alt="P3 Mask">
+        <label><input type="checkbox" name="ppe_mask_p3"> P3 Mask</label>
+      </div>
+      <div class="ppe-item">
+        <img src="ppe-breathing_apparatus.jpeg" alt="Breathing Apparatus">
+        <label><input type="checkbox" name="ppe_ba"> BA</label>
+      </div>
+      <div class="ppe-item">
+        <img src="ppe-harness.jpeg" alt="Harness">
+        <label><input type="checkbox" name="ppe_harness"> Harness</label>
+      </div>
+    </div>
+    <label>Other PPE or Tools Required
+      <textarea name="ppe_other" rows="3"></textarea>
+    </label>
+  </fieldset>
+
+  <!-- Other Specific PPE or Tools Required -->
+  <fieldset>
+    <legend>Other Specific PPE or Tools Required</legend>
+    <ul>
+      <li>Safety goggles/face shield when using power tools or risk of flying debris</li>
+      <li>Hearing protection for loud machinery or noise greater than 85&nbsp;dB</li>
+      <li>Insulating gloves rated for electrical work when handling cables near potential live services or when “test-before-touch” verifying de‑energised cables</li>
+    </ul>
+    <label>Additional PPE or tools required
+      <textarea name="other_ppe_tools" rows="3"></textarea>
+    </label>
+  </fieldset>
+
+  <!-- Training, Skills &amp; Licence Requirements -->
+  <fieldset>
+    <legend>Training, Skills &amp; Licence Requirements</legend>
+    <ul>
+      <li>Worker competency: qualified electricians, white card, licensed electrician supervision</li>
+      <li>Excavation supervision by a competent person with appropriate permits</li>
+      <li>Service location: Dial Before You Dig &amp; certified locator; no mechanical digging until services are located</li>
+      <li>Authorisations: notifications and permits from SA Power Networks</li>
+      <li>Plant operators: crane or heavy equipment high‑risk licences</li>
+    </ul>
+    <label>Additional training/licence requirements
+      <textarea name="training_additional" rows="3"></textarea>
+    </label>
+  </fieldset>
+
+  <!-- Applicable Legislative References -->
+  <fieldset>
+    <legend>Applicable Legislative References</legend>
+    <ul>
+      <li>Work Health and Safety Act&nbsp;2012&nbsp;(SA) &amp; WHS Regulations&nbsp;2012&nbsp;(SA)</li>
+      <li>Code of Practice: Excavation Work</li>
+      <li>Code of Practice: Managing Electrical Risks in the Workplace</li>
+      <li>Code of Practice: Working Near Overhead &amp; Underground Electric Lines</li>
+      <li>AS/NZS&nbsp;3000‑2018 (Electrical Installations – Wiring Rules)</li>
+      <li>AS/NZS&nbsp;3008 (Electrical Installations – Selection of Cables)</li>
+    </ul>
+  </fieldset>
+
+  <!-- Site Response Plan -->
+  <fieldset>
+    <legend>Site Response Plan</legend>
+    <label>Site Address
+      <input type="text" name="emergency_address" value="1277–1297 Port Wakefield Rd, Waterloo Corner SA">
+    </label>
+  </fieldset>
+
+  <!-- Hazards to Consider -->
+  <fieldset>
+    <legend>Hazards &amp; Energies to Consider</legend>
+    <h4>Energies</h4>
+    <div class="grid-3">
+      <label><input type="checkbox" name="energy_electrical"> Electrical</label>
+      <label><input type="checkbox" name="energy_pneumatic"> Pneumatic</label>
+      <label><input type="checkbox" name="energy_hydraulic"> Hydraulic</label>
+      <label><input type="checkbox" name="energy_chemical"> Chemical</label>
+      <label><input type="checkbox" name="energy_heat"> Heat/Fire/Steam</label>
+      <label><input type="checkbox" name="energy_radiation"> Radiation</label>
+      <label><input type="checkbox" name="energy_cold"> Cold</label>
+      <label><input type="checkbox" name="energy_pressurised"> Pressurised Systems</label>
+      <label><input type="checkbox" name="energy_gravitational"> Gravitational</label>
+      <label><input type="checkbox" name="energy_mechanical"> Mechanical</label>
+      <label><input type="checkbox" name="energy_noise"> Noise</label>
+      <label><input type="checkbox" name="energy_vibrations"> Vibrations</label>
+      <label><input type="checkbox" name="energy_stored"> Stored Residual</label>
+      <label><input type="checkbox" name="energy_explosive"> Explosive Gases</label>
+    </div>
+    <h4>Hazard Conditions</h4>
+    <div class="grid-3">
+      <label><input type="checkbox" name="haz_manual_handling"> Manual handling</label>
+      <label><input type="checkbox" name="haz_confined_space"> Confined space</label>
+      <label><input type="checkbox" name="haz_work_at_heights"> Work at heights</label>
+      <label><input type="checkbox" name="haz_hot_work"> Hot work</label>
+      <label><input type="checkbox" name="haz_rail_work"> Rail work</label>
+      <label><input type="checkbox" name="haz_mobile_equip"> Vehicles &amp; mobile equipment</label>
+      <label><input type="checkbox" name="haz_crane_work"> Crane work</label>
+      <label><input type="checkbox" name="haz_underground_services"> Underground services</label>
+      <label><input type="checkbox" name="haz_weather"> Changed weather conditions</label>
+      <label><input type="checkbox" name="haz_water"> Working on/in water</label>
+      <label><input type="checkbox" name="haz_flying_metal"> Removing hardened metals/flying metal</label>
+      <label><input type="checkbox" name="haz_slip_trip"> Slip/trip/fall</label>
+      <label><input type="checkbox" name="haz_explosives"> Explosives</label>
+      <label><input type="checkbox" name="haz_above_below"> Working above/below</label>
+      <label><input type="checkbox" name="haz_chemical_spillage"> Chemical spillage</label>
+      <label><input type="checkbox" name="haz_remote_areas"> Working in remote areas</label>
+      <label><input type="checkbox" name="haz_vapours"> Vapours/fumes</label>
+      <label><input type="checkbox" name="haz_dust"> Dust</label>
+      <label><input type="checkbox" name="haz_noise"> Noise</label>
+      <label><input type="checkbox" name="haz_restricted"> Restricted/cramped spaces</label>
+      <label><input type="checkbox" name="haz_flammable"> Flammable liquids/materials</label>
+      <label><input type="checkbox" name="haz_process_materials"> Working near process materials</label>
+      <label><input type="checkbox" name="haz_lighting"> Inadequate lighting</label>
+      <label><input type="checkbox" name="haz_falling_objects"> Falling objects</label>
+      <label><input type="checkbox" name="haz_vehicle_access"> Vehicle access</label>
+      <label><input type="checkbox" name="haz_access_egress"> Access/Egress</label>
+    </div>
+    <h4>Electrical Hazards</h4>
+    <div class="grid-3">
+      <label><input type="checkbox" name="elec_multiple"> Multiple supplies</label>
+      <label><input type="checkbox" name="elec_plc"> PLC supply</label>
+      <label><input type="checkbox" name="elec_test"> Test before you touch</label>
+      <label><input type="checkbox" name="elec_fuses"> Fuses/circuit breakers</label>
+      <label><input type="checkbox" name="elec_high_voltage"> High voltage</label>
+      <label><input type="checkbox" name="elec_low_voltage"> Low voltage</label>
+      <label><input type="checkbox" name="elec_mcc"> MCC switchroom</label>
+      <label><input type="checkbox" name="elec_control"> Control circuits</label>
+      <label><input type="checkbox" name="elec_power_lines"> Working on/near power lines</label>
+      <label><input type="checkbox" name="elec_underground"> Underground services</label>
+    </div>
+    <h4>Controls to Implement</h4>
+    <div class="grid-3">
+      <label><input type="checkbox" name="ctrl_isolation"> Isolation(s)</label>
+      <label><input type="checkbox" name="ctrl_two_man"> Two man lift</label>
+      <label><input type="checkbox" name="ctrl_lifting_aids"> Lifting aids required</label>
+      <label><input type="checkbox" name="ctrl_fit_tooling"> Fit for purpose tooling</label>
+      <label><input type="checkbox" name="ctrl_ventilation"> Ventilation required</label>
+      <label><input type="checkbox" name="ctrl_hot_work"> Hot work permit</label>
+      <label><input type="checkbox" name="ctrl_confined_space"> Confined space</label>
+      <label><input type="checkbox" name="ctrl_confined_permit"> Confined space permit</label>
+      <label><input type="checkbox" name="ctrl_height_permit"> Working at height permit</label>
+      <label><input type="checkbox" name="ctrl_sds"> SDS/Chemical alert</label>
+      <label><input type="checkbox" name="ctrl_qualified"> Suitably qualified persons</label>
+      <label><input type="checkbox" name="ctrl_authority"> Authority to work</label>
+      <label><input type="checkbox" name="ctrl_rescue_plan"> Rescue plan required</label>
+      <label><input type="checkbox" name="ctrl_housekeeping"> Housekeeping</label>
+      <label><input type="checkbox" name="ctrl_traffic"> Traffic control</label>
+      <label><input type="checkbox" name="ctrl_communication"> Communication</label>
+      <label><input type="checkbox" name="ctrl_barricade"> Barricade required</label>
+      <label><input type="checkbox" name="ctrl_signage"> Signage required</label>
+      <label><input type="checkbox" name="ctrl_barrier_tape"> Barrier tape required</label>
+      <label><input type="checkbox" name="ctrl_spill_kit"> Spill kit required</label>
+      <label><input type="checkbox" name="ctrl_waste"> Waste disposal</label>
+      <label><input type="checkbox" name="ctrl_harness"> Harness required</label>
+      <label><input type="checkbox" name="ctrl_scaffolding"> Scaffolding required</label>
+      <label><input type="checkbox" name="ctrl_platforms"> Working platforms</label>
+      <label><input type="checkbox" name="ctrl_high_voltage_permit"> High voltage permits</label>
+      <label><input type="checkbox" name="ctrl_excavation_permit"> Excavation permit/dial before you dig</label>
+    </div>
+  </fieldset>
+
+  <!-- Job Sequence Table -->
+  <fieldset>
+    <legend>Job Steps – Hazard Identification &amp; Controls</legend>
+    <div class="table-responsive">
+    <table id="jobTable">
+      <thead>
+        <tr>
+          <th>Job Sequence</th>
+          <th>Potential Hazards &amp; Risks</th>
+          <th>Control Measures</th>
+          <th>Initial Risk</th>
+          <th>Residual Risk</th>
+          <th>Responsible Person</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Prepopulated job sequence based on the SWMS document -->
+        <tr>
+          <td><input type="text" name="job_seq[]" value="Planning &amp; Preparation" readonly></td>
+          <td><textarea name="hazards[]" rows="3">Unidentified underground services; improper equipment or lack of controls; missing or incorrect information causing serious incidents.</textarea></td>
+          <td><textarea name="controls[]" rows="3">Obtain relevant drawings/service plans; conduct a pre‑start meeting with the crew; verify permits (e.g. permit to excavate); locate and mark services using a cable locator and potholing; establish exclusion zones; confirm qualifications and PPE; inspect equipment; plan cable route to avoid conflicts.</textarea></td>
+          <td><select name="initial_risk[]">
+            <option value="1" selected>1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+          </select></td>
+          <td><select name="residual_risk[]">
+            <option value="1" selected>1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+          </select></td>
+          <td><input type="text" name="responsible[]"></td>
+        </tr>
+        <tr>
+          <td><input type="text" name="job_seq[]" value="Traffic Management &amp; Site Access" readonly></td>
+          <td><textarea name="hazards[]" rows="3">Moving plant striking workers; unauthorized access to the cable work zone.</textarea></td>
+          <td><textarea name="controls[]" rows="3">Delineate the work zone with barriers and signage; implement traffic control if needed; use UHF radios or hand signals; enforce site speed limits; position a spotter; ensure high‑visibility PPE; schedule work during low‑traffic times.</textarea></td>
+          <td><select name="initial_risk[]">
+            <option value="1" selected>1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+          </select></td>
+          <td><select name="residual_risk[]">
+            <option value="1" selected>1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+          </select></td>
+          <td><input type="text" name="responsible[]"></td>
+        </tr>
+        <tr>
+          <td><input type="text" name="job_seq[]" value="Delivery &amp; Handling of Cable Drums" readonly></td>
+          <td><textarea name="hazards[]" rows="3">Drums rolling or toppling; dropped loads during unloading; manual handling injuries.</textarea></td>
+          <td><textarea name="controls[]" rows="3">Use mechanical lifting only; ensure licensed operators and dogmen are engaged; confirm forklift capacity before lifting; set an exclusion zone; chock wheels; use trolleys or team lifts; ensure flat stable ground; maintain adequate overhead clearance.</textarea></td>
+          <td><select name="initial_risk[]">
+            <option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+          </select></td>
+          <td><select name="residual_risk[]">
+            <option value="1" selected>1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+          </select></td>
+          <td><input type="text" name="responsible[]"></td>
+        </tr>
+        <tr>
+          <td><input type="text" name="job_seq[]" value="Excavation &amp; Trenching" readonly></td>
+          <td><textarea name="hazards[]" rows="3">Ground collapse; falls into trench; striking utilities; dust; equipment strikes; spoil pile collapse.</textarea></td>
+          <td><textarea name="controls[]" rows="3">Obtain a permit to excavate; use a trained operator and spotter; hand dig near utilities; install trench shoring if depth exceeds 1.5&nbsp;m; place spoil at least 1&nbsp;m from edge; provide a ladder for trench greater than 1.2&nbsp;m; install barricades and warnings; monitor trench stability; suppress dust.</textarea></td>
+          <td><select name="initial_risk[]">
+            <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4" selected>4</option><option value="5">5</option>
+          </select></td>
+          <td><select name="residual_risk[]">
+            <option value="1" selected>1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+          </select></td>
+          <td><input type="text" name="responsible[]"></td>
+        </tr>
+        <tr>
+          <td><input type="text" name="job_seq[]" value="Installing Conduits or Cable Bedding" readonly></td>
+          <td><textarea name="hazards[]" rows="3">Dust and inhalation hazards; pinch points; trip hazards.</textarea></td>
+          <td><textarea name="controls[]" rows="3">Use the correct cutting tools; wear safety glasses and a dust mask; deburr conduit ends; use spacers for separation; secure conduits; clear conduit before pulling; install marker tape; clean up off‑cuts.</textarea></td>
+          <td><select name="initial_risk[]">
+            <option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+          </select></td>
+          <td><select name="residual_risk[]">
+            <option value="1" selected>1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+          </select></td>
+          <td><input type="text" name="responsible[]"></td>
+        </tr>
+        <tr>
+          <td><input type="text" name="job_seq[]" value="Cable Pulling &amp; Laying" readonly></td>
+          <td><textarea name="hazards[]" rows="3">Strains and sprains; snap‑back injuries; hand injuries; cable damage; machinery entanglement.</textarea></td>
+          <td><textarea name="controls[]" rows="3">Use rated stands and jacks; establish clear communication protocols; position spotters; stay clear of tension lines; use rolling bars or rollers; take breaks for inspection; do not wrap cable around hands; control access to the area.</textarea></td>
+          <td><select name="initial_risk[]">
+            <option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option>
+          </select></td>
+          <td><select name="residual_risk[]">
+            <option value="1" selected>1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+          </select></td>
+          <td><input type="text" name="responsible[]"></td>
+        </tr>
+        <tr>
+          <td><input type="text" name="job_seq[]" value="Placing Cables in Trench" readonly></td>
+          <td><textarea name="hazards[]" rows="3">Back and joint injuries; crush injuries; cable insulation damage; heat stress.</textarea></td>
+          <td><textarea name="controls[]" rows="3">Use correct manual handling techniques; maintain minimum bend radius; place sand or padding in the trench; avoid stepping on cables; maintain separation; take breaks and stay hydrated; use sun protection.</textarea></td>
+          <td><select name="initial_risk[]">
+            <option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option>
+          </select></td>
+          <td><select name="residual_risk[]">
+            <option value="1" selected>1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+          </select></td>
+          <td><input type="text" name="responsible[]"></td>
+        </tr>
+        <tr>
+          <td><input type="text" name="job_seq[]" value="Backfilling &amp; Reinstatement" readonly></td>
+          <td><textarea name="hazards[]" rows="3">Cable damage from backfill; dust; manual strain; trip hazard.</textarea></td>
+          <td><textarea name="controls[]" rows="3">Have the supervisor inspect before backfill; use protective bedding; apply layered backfill; install marker tape; engage experienced operators only; exclude workers during backfilling; compact carefully.</textarea></td>
+          <td><select name="initial_risk[]">
+            <option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+          </select></td>
+          <td><select name="residual_risk[]">
+            <option value="1" selected>1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+          </select></td>
+          <td><input type="text" name="responsible[]"></td>
+        </tr>
+        <tr>
+          <td><input type="text" name="job_seq[]" value="Completion &amp; Housekeeping" readonly></td>
+          <td><textarea name="hazards[]" rows="3">Slips or trips from leftover material; improper waste disposal; missed damage or errors; delays on re‑energization.</textarea></td>
+          <td><textarea name="controls[]" rows="3">Clean up tools and debris; dispose of waste properly; perform a final inspection; clear any isolation or tagging; notify the principal contractor.</textarea></td>
+          <td><select name="initial_risk[]">
+            <option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+          </select></td>
+          <td><select name="residual_risk[]">
+            <option value="1" selected>1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+          </select></td>
+          <td><input type="text" name="responsible[]"></td>
+        </tr>
+        <tr>
+          <td><input type="text" name="job_seq[]" value="Emergency Response (Accident/Incident)" readonly></td>
+          <td><textarea name="hazards[]" rows="3">Electric shock; crush injury; trench collapse; fire or explosion.</textarea></td>
+          <td><textarea name="controls[]" rows="3">Stop work and secure the area; isolate power; call 000; use first aid or fire extinguisher; guide emergency responders to the site; muster at the emergency point; resume work only with approval.</textarea></td>
+          <td><select name="initial_risk[]">
+            <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4" selected>4</option><option value="5">5</option>
+          </select></td>
+          <td><select name="residual_risk[]">
+            <option value="1" selected>1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+          </select></td>
+          <td><input type="text" name="responsible[]"></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <button type="button" onclick="addRow()">Add row</button>
+  </fieldset>
+
+  <!-- Site Specific or Change in Conditions -->
+  <fieldset>
+    <legend>Site Specific or Change in Conditions</legend>
+    <p>Use this section to record any changes in conditions or site‑specific hazards and controls.</p>
+    <div class="table-responsive">
+      <table id="changeTable">
+        <thead>
+          <tr>
+            <th>Job Sequence</th>
+            <th>Hazards &amp; Risks</th>
+            <th>Controls to Implement</th>
+            <th>Hazard Control (Y/N)</th>
+            <th>Responsible Person</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="text" name="change_job_seq[]"></td>
+            <td><textarea name="change_hazards[]" rows="2"></textarea></td>
+            <td><textarea name="change_controls[]" rows="2"></textarea></td>
+            <td>
+              <select name="change_control_done[]">
+                <option value="">--</option>
+                <option value="Y">Y</option>
+                <option value="N">N</option>
+              </select>
+            </td>
+            <td><input type="text" name="change_responsible[]"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <button type="button" onclick="addChangeRow()">Add Change</button>
+  </fieldset>
+
+  <!-- Risk Matrix & Legend -->
+  <fieldset>
+    <legend>Risk Matrix &amp; Legend</legend>
+    <!-- Display multiple risk-related images in a responsive grid -->
+    <div class="risk-images">
+      <!-- Risk matrix grid -->
+      <img src="a957d497-9b18-443c-8b1a-bb8a9eb91c47.png" alt="Risk Matrix">
+      <!-- Likelihood of occurrence table -->
+      <img src="a94bedc5-4370-409d-b2d9-b00836a8d2c7.png" alt="Likelihood of Occurrence">
+      <!-- Legend / action required table -->
+      <img src="a7a4d13e-79f4-4c24-a10f-e8414ecfef19.png" alt="Legend &amp; Action Required">
+    </div>
+  </fieldset>
+
+  <!-- SWMS Sign-On -->
+  <fieldset>
+    <legend>SWMS Acknowledgement &amp; Sign-On</legend>
+    <p>All personnel must read and understand this SWMS before commencing work.</p>
+    <p style="color:#c00;font-weight:bold;">If you have put in place the controls and the risk is still assessed as <strong>HIGH</strong>, do not start the job.</p>
+    <div class="table-responsive">
+    <table id="signTable">
+      <thead>
+        <tr><th>Print Name</th><th>Signature</th><th>Date</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="text" name="sign_name[]"></td>
+          <td><input type="text" name="sign_sig[]" placeholder="Sign or type name"></td>
+          <td><input type="date" name="sign_date[]"></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <button type="button" onclick="addSignRow()">Add signer</button>
+  </fieldset>
+
+  <div style="text-align:center;margin-top:1.5rem;">
+    <button type="submit">Submit SWMS</button>
+  </div>
+</form>
+
+<script>
+function addRow(){
+  const tbody = document.querySelector('#jobTable tbody');
+  const row = tbody.querySelector('tr').cloneNode(true);
+  row.querySelectorAll('input, textarea, select').forEach(el => {
+    // Do not reset select elements; set to default
+    if(el.tagName.toLowerCase() === 'select') {
+      el.selectedIndex = 0;
+    } else if(el.readOnly) {
+      // Preserve value for read-only job sequence cells
+      return;
+    } else {
+      el.value = '';
+    }
+  });
+  tbody.appendChild(row);
+}
+function addSignRow(){
+  const tbody = document.querySelector('#signTable tbody');
+  const row = tbody.querySelector('tr').cloneNode(true);
+  row.querySelectorAll('input').forEach(el => { el.value = ''; });
+  tbody.appendChild(row);
+}
+function addChangeRow(){
+  const tbody = document.querySelector('#changeTable tbody');
+  const row = tbody.querySelector('tr').cloneNode(true);
+  row.querySelectorAll('input, textarea, select').forEach(el => {
+    if(el.tagName.toLowerCase() === 'select') el.selectedIndex = 0;
+    else el.value = '';
+  });
+  tbody.appendChild(row);
+}
+document.getElementById('swmsForm').addEventListener('submit', function(e){
+  // Validate form fields.
+  // Check that at least one sign-on entry is fully completed
+  let signFilled = false;
+  this.querySelectorAll('#signTable tbody tr').forEach(function(row){
+    const name = row.querySelector('input[name="sign_name[]"]').value.trim();
+    const sig = row.querySelector('input[name="sign_sig[]"]').value.trim();
+    const date = row.querySelector('input[name="sign_date[]"]').value;
+    if(name && sig && date){
+      signFilled = true;
+    }
+  });
+  if(!signFilled){
+    e.preventDefault();
+    alert('Please complete at least one SWMS Acknowledgement & Sign‑On entry before submitting.');
+    return false;
+  }
+  e.preventDefault();
+  // TODO: send form data to email and SharePoint. This requires server-side integration.
+  alert('SWMS submitted successfully. A copy will be sent to your email and uploaded to SharePoint.');
+});
+</script>
+</body>
+</html>
