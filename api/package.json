@@ -4,6 +4,8 @@
   "description": "Azure Functions API for SWMS form",
   "private": true,
   "dependencies": {
-    "@azure/communication-email": "^1.1.0"
+    "@azure/communication-email": "^1.1.0",
+    "pdf-lib": "^1.17.1",
+    "node-fetch": "^2.6.7"
   }
 }
