@@ -1,0 +1,8 @@
+{
+  "name": "t2d-swms-form",
+  "version": "1.0.0",
+  "description": "SWMS web form",
+  "scripts": {
+    "build": "echo 'No build needed'"
+  }
+}
