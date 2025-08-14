@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Safe Work Method Statement</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      color: #000;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+    h2 {
+      font-size: 18px;
+      margin-top: 24px;
+      margin-bottom: 8px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #000;
+      padding: 6px;
+      text-align: left;
+      font-size: 12px;
+    }
+    .two-col {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .two-col div {
+      width: 48%;
+      border: 1px solid #000;
+      padding: 6px;
+      font-size: 12px;
+      box-sizing: border-box;
+    }
+    .signature-box {
+      border: 1px dashed #999;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+    .footer-info {
+      margin-top: 16px;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Safe Work Method Statement (SWMS) — {{taskName}}</h1>
+  <div class="footer-info">Generated: {{now}}</div>
+
+  <div class="two-col">
+    <div>Site / Location:<br>{{location}}</div>
+    <div>Date:<br>{{date}}</div>
+  </div>
+
+  <div class="two-col">
+    <div>Submitted by:<br>{{name}}{{#company}} ({{company}}){{/company}}</div>
+    <div>Contact:<br>{{email}}{{#phone}} {{phone}}{{/phone}}</div>
+  </div>
+
+  {{#notes}}
+  <div style="border:1px solid #000; padding:6px; margin-bottom:8px; font-size:12px;">
+    <strong>Notes:</strong><br>{{notes}}
+  </div>
+  {{/notes}}
+
+  <h2>Controls & Checklist (starter)</h2>
+  <table>
+    <tr>
+      <th>Hazard / Risk</th>
+      <th>Control(s)</th>
+      <th>Responsible</th>
+    </tr>
+    <tr>
+      <td>General site hazards, slips/trips, plant movement</td>
+      <td>Prestart, barricades/signage, spotters, housekeeping, comply with site SWMS</td>
+      <td>Supervisor / Crew</td>
+    </tr>
+    <tr>
+      <td>Task-specific hazards (fill in)</td>
+      <td>Document controls here</td>
+      <td>...</td>
+    </tr>
+  </table>
+
+  <h2>Declaration</h2>
+  <p style="font-size:12px;">I confirm the above controls will be implemented and the SWMS has been communicated to all workers involved.</p>
+
+  <h3 style="font-size:14px; margin-top:16px;">Signature</h3>
+  {{#signatureDataUrl}}
+    <div class="signature-box">
+      <img src="{{signatureDataUrl}}" alt="signature" style="max-height:70px; max-width:100%;" />
+    </div>
+  {{/signatureDataUrl}}
+  {{^signatureDataUrl}}
+    <div class="signature-box">
+      <em>No signature captured</em>
+    </div>
+  {{/signatureDataUrl}}
+
+  <div class="two-col">
+    <div>Name<br>{{name}}</div>
+    <div>Date<br>{{date}}</div>
+  </div>
+
+</body>
+</html>
