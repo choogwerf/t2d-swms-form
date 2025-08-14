@@ -1,46 +1,41 @@
 const { EmailClient } = require("@azure/communication-email");
-const { PDFDocument, rgb, StandardFonts } = require('pdf-lib');
-
-// Note: we no longer use Playwright to render HTML to PDF.  Instead we
-// construct a simple PDF using the pdf-lib library.  This approach avoids
-// heavy headless browser dependencies that often fail to build in Azure
-// Static Web App environments.
-
 
 /**
- * Helper to pick a subset of keys from an object and coerce values to strings.
- * Undefined or null values are ignored.
+ * Helper to safely get a string value from an object. If the key
+ * does not exist or the value is undefined/null, returns the fallback.
+ *
  * @param {Object} obj Source object
- * @param {string[]} keys Keys to pick
- * @returns {Object}
+ * @param {string} key Key to retrieve
+ * @param {string} fallback Fallback value if key is missing
  */
-function pick(obj, keys) {
-  const out = {};
-  keys.forEach(key => {
-    const val = obj[key];
-    if (val !== undefined && val !== null) {
-      out[key] = String(val);
-    }
-  });
-  return out;
+function getString(obj, key, fallback = "") {
+  const val = obj[key];
+  return val !== undefined && val !== null ? String(val) : fallback;
 }
 
 /**
- * HTTP-triggered Azure Function which accepts form data, renders an HTML
- * template, converts it to a PDF and emails it using Azure Communication
- * Services. Expected JSON body keys include taskName, location, name,
- * email, company, phone, date, swmsId, notes and signatureDataUrl.
+ * Azure Function entry point. Receives JSON data from the SWMS form,
+ * composes a plain text and HTML email summarising the submission and
+ * sends it via Azure Communication Services. No PDF is generated in
+ * this variant – the goal is to keep dependencies light and ensure
+ * deployment succeeds in Azure Static Web Apps environments.
+ *
+ * Expected keys include taskName, location, name, email, company,
+ * phone, date, swmsId and notes. Alternative keys used by the front
+ * end (like job_description or job_location) are also checked to
+ * populate missing values.
  *
  * Required environment variables:
  *  - COMMUNICATION_SERVICES_CONNECTION_STRING: connection string for ACS
- *  - EMAIL_SENDER: verified email address used as the sender
- *  - EMAIL_RECIPIENT (optional): default recipient address
+ *  - EMAIL_SENDER: verified sender address
+ *  - EMAIL_RECIPIENT (optional): default recipient when form does not provide an email
  */
 module.exports = async function (context, req) {
   try {
-    // Ensure required settings are present
     const connStr = process.env.COMMUNICATION_SERVICES_CONNECTION_STRING;
     const sender = process.env.EMAIL_SENDER;
+    const defaultRecipient = process.env.EMAIL_RECIPIENT;
+
     if (!connStr) {
       throw new Error("Missing COMMUNICATION_SERVICES_CONNECTION_STRING app setting");
     }
@@ -48,122 +43,57 @@ module.exports = async function (context, req) {
       throw new Error("Missing EMAIL_SENDER app setting");
     }
 
-    // Extract and validate body
     const body = req.body || {};
-    const data = pick(body, [
-      "taskName",
-      "location",
-      "name",
-      "email",
-      "company",
-      "phone",
-      "date",
-      "swmsId",
-      "notes",
-      "signatureDataUrl"
-    ]);
-    // Provide sensible defaults for important fields.  Many of the input
-    // field names in the client form differ from the API expectations, so we
-    // attempt to derive them from alternate keys before falling back to
-    // placeholders.  Only the sender email is truly mandatory.
-    data.taskName = data.taskName || body.job_description || body.task || 'SWMS Task';
-    data.location = data.location || body.job_location || body.location || 'Unknown location';
-    data.name = data.name || body.site_manager || body.pc_representative || body.submitted_by || 'User';
-    data.email = data.email || body.email || body.manager_email || process.env.EMAIL_RECIPIENT;
-    data.date = data.date || body.date_provided || new Date().toISOString().slice(0, 10);
 
-    if (!data.email) {
-      throw new Error('An email address must be provided either in the form or via EMAIL_RECIPIENT');
+    // Extract fields with fallbacks to alternate names and defaults
+    const taskName = getString(body, "taskName") || getString(body, "job_description") || getString(body, "task") || "SWMS Task";
+    const location = getString(body, "location") || getString(body, "job_location") || "Unknown location";
+    const name = getString(body, "name") || getString(body, "site_manager") || getString(body, "pc_representative") || getString(body, "submitted_by") || "User";
+    const userEmail = getString(body, "email") || getString(body, "manager_email") || defaultRecipient;
+    const company = getString(body, "company");
+    const phone = getString(body, "phone");
+    const date = getString(body, "date") || getString(body, "date_provided") || new Date().toISOString().slice(0, 10);
+    const swmsId = getString(body, "swmsId");
+    const notes = getString(body, "notes");
+
+    if (!userEmail) {
+      throw new Error("An email address must be provided either in the form or via EMAIL_RECIPIENT");
     }
 
-    // Generate a simple PDF using pdf-lib.  We draw each field on the
-    // document, and embed the signature image (if present).  This avoids
-    // relying on Playwright or a headless browser.
-    const pdfDoc = await PDFDocument.create();
-    // A4 page size in points (72 points per inch).  A4 is 8.27 x 11.69 inches.
-    const page = pdfDoc.addPage([595.28, 841.89]);
-    const { width, height } = page.getSize();
-    const margin = 40;
-    // Load a standard font
-    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
-    const fontSize = 12;
-    let yPos = height - margin;
-    // Helper to draw a label and value
-    function drawLine(label, value) {
-      const text = `${label}: ${value || ''}`;
-      page.drawText(text, { x: margin, y: yPos, size: fontSize, font, color: rgb(0, 0, 0) });
-      yPos -= fontSize + 6;
-    }
-    drawLine('Task', data.taskName);
-    drawLine('Location', data.location);
-    drawLine('Name', data.name);
-    drawLine('Email', data.email);
-    drawLine('Company', data.company);
-    drawLine('Phone', data.phone);
-    drawLine('Date', data.date);
-    drawLine('SWMS ID', data.swmsId);
-    drawLine('Notes', data.notes);
+    // Compose plain text body
+    const plainText = [
+      `A SWMS form has been submitted:`,
+      `Task: ${taskName}`,
+      `Location: ${location}`,
+      `Name: ${name}`,
+      `Email: ${userEmail}`,
+      `Company: ${company}`,
+      `Phone: ${phone}`,
+      `Date: ${date}`,
+      `SWMS ID: ${swmsId}`,
+      `Notes: ${notes}`
+    ].join("\n");
 
-    // Draw a blank line before signature
-    yPos -= 10;
-    page.drawText('Signature:', { x: margin, y: yPos, size: fontSize, font, color: rgb(0, 0, 0) });
-    yPos -= fontSize + 6;
+    // Compose HTML body for richer formatting
+    const htmlBody = `\n      <h3>SWMS form submission</h3>\n      <ul>\n        <li><strong>Task:</strong> ${taskName}</li>\n        <li><strong>Location:</strong> ${location}</li>\n        <li><strong>Name:</strong> ${name}</li>\n        <li><strong>Email:</strong> ${userEmail}</li>\n        <li><strong>Company:</strong> ${company}</li>\n        <li><strong>Phone:</strong> ${phone}</li>\n        <li><strong>Date:</strong> ${date}</li>\n        <li><strong>SWMS ID:</strong> ${swmsId}</li>\n        <li><strong>Notes:</strong> ${notes}</li>\n      </ul>\n    `;
 
-    // If a signature data URL is provided, embed it
-    if (data.signatureDataUrl && typeof data.signatureDataUrl === 'string') {
-      try {
-        const commaIndex = data.signatureDataUrl.indexOf(',');
-        const base64 = data.signatureDataUrl.slice(commaIndex + 1);
-        const mime = data.signatureDataUrl.slice(5, commaIndex);
-        const imageBytes = Buffer.from(base64, 'base64');
-        let image;
-        if (mime.includes('png')) {
-          image = await pdfDoc.embedPng(imageBytes);
-        } else {
-          image = await pdfDoc.embedJpg(imageBytes);
-        }
-        const sigWidth = 200;
-        const sigHeight = (image.height / image.width) * sigWidth;
-        page.drawImage(image, { x: margin, y: yPos - sigHeight, width: sigWidth, height: sigHeight });
-        yPos -= sigHeight + 10;
-      } catch (e) {
-        // If embedding fails, skip the signature silently
-        context.log.warn('Failed to embed signature image:', e);
-      }
-    } else {
-      // Draw a line for signature if not provided
-      page.drawLine({ start: { x: margin, y: yPos }, end: { x: margin + 200, y: yPos }, color: rgb(0, 0, 0), thickness: 1 });
-      yPos -= 20;
-    }
-
-    // Save PDF to a Uint8Array
-    const pdfBytes = await pdfDoc.save();
-
-    // Build the email message with PDF attachment
-    const fileName = `swms-${Date.now()}.pdf`;
+    // Build the email message
     const emailClient = new EmailClient(connStr);
     const message = {
-      sender: sender,
+      sender,
       content: {
-        subject: `SWMS Form Submission: ${data.taskName}`,
-        plainText: `A SWMS form has been submitted. See attached PDF.`,
-        html: `<p>A SWMS form has been submitted.</p>`
+        subject: `SWMS Form Submission: ${taskName}`,
+        plainText,
+        html: htmlBody
       },
       toRecipients: [
         {
-          address: data.email,
-          displayName: data.name
+          address: userEmail,
+          displayName: name
         },
         {
-          address: process.env.EMAIL_RECIPIENT || sender,
+          address: defaultRecipient || sender,
           displayName: "SWMS Admin"
-        }
-      ],
-      attachments: [
-        {
-          name: fileName,
-          contentType: "application/pdf",
-          contentBytes: Buffer.from(pdfBytes).toString('base64')
         }
       ]
     };
@@ -179,7 +109,6 @@ module.exports = async function (context, req) {
       }
     };
   } catch (err) {
-    // Log and return an error
     context.log.error(err);
     context.res = {
       status: 500,
