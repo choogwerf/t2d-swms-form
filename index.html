@@ -60,6 +60,8 @@ button:hover{background:#024d28;}
   .grid-md-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
 }
 </style>
+<!-- Configuration script defines API base URL -->
+<script src="config.js"></script>
 </head>
 <body>
 <form class="container" id="swmsForm">
@@ -594,26 +596,66 @@ function addChangeRow(){
   });
   tbody.appendChild(row);
 }
-document.getElementById('swmsForm').addEventListener('submit', function(e){
-  // Validate form fields.
-  // Check that at least one sign-on entry is fully completed
+document.getElementById('swmsForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  // Validate that at least one SWMS Acknowledgement & Sign‑On entry is completed
   let signFilled = false;
-  this.querySelectorAll('#signTable tbody tr').forEach(function(row){
+  this.querySelectorAll('#signTable tbody tr').forEach(function(row) {
     const name = row.querySelector('input[name="sign_name[]"]').value.trim();
     const sig = row.querySelector('input[name="sign_sig[]"]').value.trim();
     const date = row.querySelector('input[name="sign_date[]"]').value;
-    if(name && sig && date){
+    if (name && sig && date) {
       signFilled = true;
     }
   });
-  if(!signFilled){
-    e.preventDefault();
+  if (!signFilled) {
     alert('Please complete at least one SWMS Acknowledgement & Sign‑On entry before submitting.');
-    return false;
+    return;
   }
-  e.preventDefault();
-  // TODO: send form data to email and SharePoint. This requires server-side integration.
-  alert('SWMS submitted successfully. A copy will be sent to your email and uploaded to SharePoint.');
+
+  // Collect all form data into a plain object.  Use FormData to capture
+  // values and collapse array fields (ending with []) into arrays.
+  const formData = new FormData(this);
+  const payload = {};
+  formData.forEach((value, key) => {
+    if (key.endsWith('[]')) {
+      const trimmed = key.replace(/\[\]$/, '');
+      if (!payload[trimmed]) payload[trimmed] = [];
+      payload[trimmed].push(value);
+    } else {
+      // Only assign if not already set – later values override earlier ones
+      payload[key] = value;
+    }
+  });
+
+  // Provide user feedback while submitting
+  const submitButton = this.querySelector('button[type="submit"]');
+  if (submitButton) {
+    submitButton.disabled = true;
+    submitButton.textContent = 'Submitting...';
+  }
+  try {
+    const response = await fetch((window.API_BASE_URL || '/api') + '/GeneratePdfSendEmail', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (response.ok) {
+      alert('SWMS submitted successfully. A PDF copy will be emailed shortly.');
+      this.reset();
+    } else {
+      const err = await response.json().catch(() => ({}));
+      const msg = err.error || response.statusText || 'Unknown error';
+      alert('Error submitting SWMS: ' + msg);
+    }
+  } catch (ex) {
+    alert('Error submitting SWMS: ' + (ex.message || ex));
+  } finally {
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.textContent = 'Submit SWMS';
+    }
+  }
 });
 </script>
 </body>
