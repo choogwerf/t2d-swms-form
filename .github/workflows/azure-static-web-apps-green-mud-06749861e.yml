@@ -40,12 +40,12 @@ jobs:
           action: "upload"
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-   app_location: "."
-api_location: ""
-output_location: ""
-skip_app_build: true
-skip_api_build: true
-github_id_token: ${{ steps.idtoken.outputs.result }}
+          app_location: "."         # Root of repository is the app source path
+          api_location: ""          # No API folder
+          output_location: ""       # Use build output root as site artifact
+          skip_app_build: true       # Skip building the static app
+          skip_api_build: true       # Skip building the API
+          github_id_token: ${{ steps.idtoken.outputs.result }}
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
