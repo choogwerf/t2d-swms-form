@@ -41,10 +41,10 @@ jobs:
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "."         # Root of repository is the app source path
-          api_location: ""          # No API folder
+          api_location: "api"        # Folder containing Azure Functions
           output_location: ""       # Use build output root as site artifact
-          skip_app_build: true       # Skip building the static app
-          skip_api_build: true       # Skip building the API
+          skip_app_build: true       # Skip building the static app (pre-built)
+          skip_api_build: false      # Build and deploy API functions
           github_id_token: ${{ steps.idtoken.outputs.result }}
           ###### End of Repository/Build Configurations ######
 
